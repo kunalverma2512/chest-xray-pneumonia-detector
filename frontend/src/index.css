@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+/* ─── Design System ─────────────────────────────────────────────── */
+:root {
+  --bg:          #ffffff;
+  --bg-alt:      #f9f9f9;
+  --ink:         #000000;
+  --ink-2:       #111111;
+  --ink-muted:   #555555;
+  --ink-faint:   #999999;
+  --border:      #e5e5e5;
+  --border-dark: #000000;
+  --red:         #e11d48;
+  --red-dim:     #fff1f2;
+  --font:        'Inter', system-ui, sans-serif;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.6;
+}
+
+/* ─── Typography ────────────────────────────────────────────────── */
+.text-display {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+}
+
+.text-headline {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.text-heading {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.text-subheading {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 500;
+}
+
+.text-body    { font-size: 1rem; font-weight: 400; }
+.text-caption { font-size: 0.8125rem; font-weight: 400; }
+.text-muted   { color: var(--ink-muted); }
+.text-faint   { color: var(--ink-faint); }
+
+/* ─── Sections ──────────────────────────────────────────────────── */
+.section {
+  padding: 7rem 1.5rem;
+}
+
+.section-white { background: var(--bg); }
+.section-black { background: var(--ink); color: var(--bg); }
+.section-alt   { background: var(--bg-alt); }
+
+.divider { height: 1px; background: var(--border); }
+
+/* ─── Cards / Surfaces ──────────────────────────────────────────── */
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.card-dark {
+  background: var(--ink-2);
+  border: 1px solid #222;
+  color: var(--bg);
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: var(--ink);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  border-color: var(--ink);
+}
+
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: var(--red);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  border: 2px solid var(--red);
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+
+.btn-danger:hover { background: #be123c; border-color: #be123c; }
+
+/* ─── Label chips ───────────────────────────────────────────────── */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  color: var(--ink-muted);
+  background: var(--bg);
+}
+
+.label-inverted {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.label-red {
+  background: var(--red-dim);
+  color: var(--red);
+  border-color: #fecdd3;
+}
+
+/* ─── Form inputs ───────────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-field:focus { border-color: var(--ink); }
+.input-field::placeholder { color: var(--ink-faint); }
+
+/* ─── Drag-and-drop zone ────────────────────────────────────────── */
+.drop-zone {
+  border: 2px dashed var(--border);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.drop-zone.active {
+  border-color: var(--ink);
+  background: var(--bg-alt);
+}
+
+/* ─── Animations ────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+.animate-fade-up { animation: fadeUp 0.6s ease both; }
+.cursor-blink    { animation: blink 1s step-end infinite; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Skeleton ──────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 1200px 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); }
+
+/* ─── Focus ring ────────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* ─── Navbar responsive ─────────────────────────────────────────── */
+.desktop-nav { display: none; }
+.hamburger-btn { display: flex; }
+
+@media (min-width: 768px) {
+  .desktop-nav { display: flex !important; }
+  .hamburger-btn { display: none !important; }
+  .nav-cta { display: inline-flex !important; }
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #555;
+  background: transparent;
+  transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
+}
+.nav-link:hover { background: #000; color: #fff; }
+.nav-link[aria-current="page"] { background: #f0f0f0; color: #000; }
+
+/* ─── Landing page responsive helpers ───────────────────────────── */
+.landing-hero-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.metric-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+}
+
+.section-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+@media (min-width: 768px) {
+  .section-grid-2 { grid-template-columns: 1fr 1fr; }
+}
+
+.section-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .section-grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+.section-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media (min-width: 1024px) {
+  .section-grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+@media (min-width: 640px)  { .highlights-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .highlights-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #222;
+}
+@media (min-width: 768px) {
+  .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+@media (min-width: 768px) {
+  .steps-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ─── Trust signals grid ─────────────────────────────────────────── */
+.trust-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+@media (min-width: 1024px) {
+  .trust-grid { grid-template-columns: 1fr 1fr; }
+}
+
+
+/* ─── Focus ring ────────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }

@@ -1,13 +1,17 @@
+#!/usr/bin/env python3
 """
 backend/scripts/run_cross_operator_validation.py
 
-CLI entry point for cross-operator validation.
+CLI entry point for cross-operator validation against an independent dataset.
 
-Usage (from backend/ directory):
-    python scripts/run_cross_operator_validation.py \\
-        --dataset-path /path/to/cross_operator_validation_dataset/test
+Usage (from project root):
+    python backend/scripts/run_cross_operator_validation.py \\
+        --dataset-path data/raw/external_validation
 
-The dataset directory must contain NORMAL/ and PNEUMONIA/ sub-folders.
+The external validation dataset must have:
+    dataset-path/
+        NORMAL/       (JPEG/PNG images)
+        PNEUMONIA/    (JPEG/PNG images)
 """
 
 from __future__ import annotations
@@ -25,22 +29,19 @@ from app.ml.evaluation import CrossOperatorValidator
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run cross-operator validation for PneumoDetectAI."
+        description="Run cross-operator validation on an independent dataset."
     )
     parser.add_argument(
         "--dataset-path", required=True,
-        help="Path to the cross-operator validation dataset directory. "
-             "Must contain NORMAL/ and PNEUMONIA/ sub-folders."
+        help="Path to dataset directory with NORMAL/ and PNEUMONIA/ sub-folders."
     )
     parser.add_argument(
         "--model-path", default=None,
-        help="Explicit path to the .h5 model file. "
-             "Defaults to the path from settings."
+        help="Path to the .h5 model file. Defaults to models/best_chest_xray_model.h5."
     )
     parser.add_argument(
         "--output-dir", default=None,
-        help="Directory to write results and visualisations. "
-             "Defaults to results/cross-operator_validation/."
+        help="Where to save results. Defaults to results/cross-operator_validation/."
     )
     parser.add_argument(
         "--log-level", default="INFO",
@@ -56,21 +57,28 @@ def main() -> None:
 
     validator = CrossOperatorValidator(
         model_path=args.model_path,
+        dataset_path=args.dataset_path,
         output_dir=args.output_dir,
     )
 
     try:
-        results = validator.run(dataset_path=args.dataset_path)
-    except Exception as exc:
-        logger.error("Cross-operator validation failed: %s", exc)
+        metrics = validator.run()
+        logger.info("\n" + "=" * 55)
+        logger.info("  CROSS-OPERATOR VALIDATION RESULTS")
+        logger.info("=" * 55)
+        logger.info("  Accuracy      : %.1f%%", metrics["cross_operator_accuracy"] * 100)
+        logger.info("  Sensitivity   : %.1f%%", metrics["cross_operator_sensitivity"] * 100)
+        logger.info("  Specificity   : %.1f%%", metrics["cross_operator_specificity"] * 100)
+        logger.info("  Samples       : %d", metrics["cross_operator_samples"])
+        logger.info("  Accuracy drop : %.1f%%", metrics["accuracy_drop"] * 100)
+        logger.info("=" * 55)
+        logger.info(
+            "✅ Validation complete. Results saved to results/cross-operator_validation/"
+        )
+        sys.exit(0)
+    except Exception as e:
+        logger.error("❌ Cross-operator validation failed: %s", e)
         sys.exit(1)
-
-    print("\n" + "=" * 60)
-    print("CROSS-OPERATOR VALIDATION RESULTS")
-    print("=" * 60)
-    for key, value in results.items():
-        print(f"  {key:<45} {value}")
-    print("=" * 60)
 
 
 if __name__ == "__main__":

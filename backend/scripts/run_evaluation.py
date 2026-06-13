@@ -1,12 +1,12 @@
+#!/usr/bin/env python3
 """
 backend/scripts/run_evaluation.py
 
-CLI entry point for evaluating the model on the internal test set.
+CLI entry point for evaluating the trained model on the internal test set.
 
-Usage (from backend/ directory):
-    python scripts/run_evaluation.py
-    python scripts/run_evaluation.py --model-path /path/to/model.h5
-    python scripts/run_evaluation.py --data-path /path/to/processed
+Usage (from project root):
+    python backend/scripts/run_evaluation.py
+    python backend/scripts/run_evaluation.py --model-path models/best_chest_xray_model.h5
 """
 
 from __future__ import annotations
@@ -24,21 +24,15 @@ from app.ml.evaluation import ModelEvaluator
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Evaluate PneumoDetectAI on the internal test set."
+        description="Evaluate the PneumoDetectAI model on the internal test set."
     )
     parser.add_argument(
         "--model-path", default=None,
-        help="Explicit path to the .h5 model file. "
-             "Defaults to the path from settings."
+        help="Path to the .h5 model file. Defaults to models/best_chest_xray_model.h5."
     )
     parser.add_argument(
         "--data-path", default=None,
-        help="Path to the processed dataset directory (must contain a test/ folder). "
-             "Defaults to the path from settings."
-    )
-    parser.add_argument(
-        "--no-save", action="store_true",
-        help="Skip saving the JSON metrics file."
+        help="Path to the processed data directory. Defaults to data/processed/."
     )
     parser.add_argument(
         "--log-level", default="INFO",
@@ -58,18 +52,21 @@ def main() -> None:
     )
 
     try:
-        metrics = evaluator.run(save_json=not args.no_save)
-    except Exception as exc:
-        logger.error("Evaluation failed: %s", exc)
+        metrics = evaluator.run()
+        logger.info("\n" + "=" * 55)
+        logger.info("  INTERNAL EVALUATION RESULTS")
+        logger.info("=" * 55)
+        logger.info("  Accuracy      : %.1f%%", metrics["accuracy"] * 100)
+        logger.info("  Sensitivity   : %.1f%%", metrics["sensitivity"] * 100)
+        logger.info("  Specificity   : %.1f%%", metrics["specificity"] * 100)
+        logger.info("  F1-Score      : %.4f", metrics["f1_score"])
+        logger.info("  ROC-AUC       : %.4f", metrics["roc_auc"])
+        logger.info("=" * 55)
+        logger.info("✅ Evaluation complete. Results saved to results/internal_validation/")
+        sys.exit(0)
+    except Exception as e:
+        logger.error("❌ Evaluation failed: %s", e)
         sys.exit(1)
-
-    print("\n" + "=" * 60)
-    print("EVALUATION RESULTS")
-    print("=" * 60)
-    for key, value in metrics.items():
-        if key != "confusion_matrix":
-            print(f"  {key:<30} {value}")
-    print("=" * 60)
 
 
 if __name__ == "__main__":

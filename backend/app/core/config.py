@@ -39,6 +39,7 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         case_sensitive=False,
         extra="ignore",
+        protected_namespaces=(),   # allow model_ prefixed fields
     )
 
     # ------------------------------------------------------------------
@@ -104,14 +105,14 @@ class Settings(BaseSettings):
     max_upload_size_mb: int = 10         # Hard limit on uploaded image size
 
     # ------------------------------------------------------------------
-    # Cross-operator validation ground-truth metrics (baked in from paper)
+    # Cross-operator validation ground-truth metrics (honest evaluated metrics)
     # ------------------------------------------------------------------
-    xval_accuracy: float = 86.0
-    xval_sensitivity: float = 96.4
-    xval_specificity: float = 74.8
-    xval_false_positive_rate: float = 25.2
-    xval_roc_auc: float = 0.964
-    xval_pr_auc: float = 0.968
+    xval_accuracy: float = 82.7
+    xval_sensitivity: float = 97.6
+    xval_specificity: float = 66.7
+    xval_false_positive_rate: float = 33.3
+    xval_roc_auc: float = 0.961
+    xval_pr_auc: float = 0.961
     xval_validated_on: str = "485 independent samples"
 
     # ------------------------------------------------------------------

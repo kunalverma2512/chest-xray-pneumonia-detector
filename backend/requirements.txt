@@ -1,26 +1,17 @@
-# ============================================================
+# ===========================================================================
 #  PneumoDetectAI Backend – Python Dependencies
-# ============================================================
-#
-#  macOS / Apple Silicon compatible.
-#  Does NOT include any CUDA / NVIDIA dependencies.
-#
-#  Install:
-#    pip install -r requirements.txt
-#
-#  For Apple Silicon (tensorflow-metal acceleration):
-#    pip install tensorflow-macos tensorflow-metal
-#    (then comment out the generic `tensorflow` line below)
-# ============================================================
+#  Compatible with Python 3.11, macOS Apple Silicon (arm64)
+#  NO CUDA / NVIDIA dependencies
+# ===========================================================================
 
 # --- Web framework ---
 fastapi==0.111.0
 uvicorn[standard]==0.29.0
-python-multipart==0.0.9     # Required for UploadFile / form-data
+python-multipart==0.0.9
+anyio==4.3.0
 
-# --- ML / Inference ---
-# For Apple Silicon: replace with `tensorflow-macos` + `tensorflow-metal`
-tensorflow==2.16.1           # CPU-only; safe on Apple Silicon via Rosetta
+# --- ML / Inference (Apple Silicon CPU) ---
+tensorflow==2.16.2
 numpy==1.26.4
 Pillow==10.3.0
 
@@ -28,7 +19,7 @@ Pillow==10.3.0
 pydantic==2.7.1
 pydantic-settings==2.2.1
 
-# --- Training / Evaluation (optional – not needed for API-only use) ---
+# --- Training / Evaluation ---
 scikit-learn==1.4.2
 matplotlib==3.9.0
 seaborn==0.13.2
@@ -37,5 +28,4 @@ scipy==1.13.0
 
 # --- Testing ---
 pytest==8.2.0
-httpx==0.27.0                # Required by TestClient in FastAPI >= 0.107
-anyio==4.3.0
+httpx==0.27.0

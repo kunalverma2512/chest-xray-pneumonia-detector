@@ -101,7 +101,6 @@ class ChestXRayTrainer:
                 logger.error("Missing data split folder: %s", data_path / split)
                 return None, None, None
 
-        # Training: with augmentation (prevents overfitting – unchanged)
         train_datagen = ImageDataGenerator(
             rescale=1.0 / 255,
             rotation_range=20,
@@ -141,7 +140,6 @@ class ChestXRayTrainer:
         return train_generator, val_generator, test_generator
 
     # ------------------------------------------------------------------
-    # Model architecture (unchanged from original)
     # ------------------------------------------------------------------
 
     def build_model(self) -> tf.keras.Model:

@@ -25,6 +25,13 @@ venv/
 env/
 ENV/
 tf_env/
+.venv/
+backend/.venv/
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
 
 # IDEs
 .vscode/
@@ -37,9 +44,7 @@ tf_env/
 Thumbs.db
 
 # Data files (exclude large datasets)
-data/raw/
-*.h5
-*.hdf5
+data/
 external_validation_dataset/
 *.zip
 *.tar.gz
@@ -55,10 +60,10 @@ logs/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# Model files (too large for GitHub)
-models/*.h5
-models/*.pkl
-models/*.joblib
+# Models
+# We WANT to keep the best model, but ignore others and images
+models/*
+!models/best_chest_xray_model.h5
 
 # Temporary files
 temp/

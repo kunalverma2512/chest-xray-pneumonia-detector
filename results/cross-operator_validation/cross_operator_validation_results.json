@@ -1,0 +1,21 @@
+{
+  "cross_operator_accuracy": 0.8268041237113402,
+  "cross_operator_sensitivity": 0.9760956175298805,
+  "cross_operator_specificity": 0.6666666666666666,
+  "cross_operator_precision": 0.7585139318885449,
+  "cross_operator_f1": 0.8536585365853658,
+  "cross_operator_roc_auc": 0.9607212176933293,
+  "cross_operator_pr_auc": 0.44893053476931555,
+  "cross_operator_mcc": 0.6809832133979422,
+  "cross_operator_kappa": 0.6495302983379787,
+  "cross_operator_ppv": 0.7585139318885449,
+  "cross_operator_npv": 0.9629629629629629,
+  "cross_operator_fpr": 0.3333333333333333,
+  "cross_operator_fnr": 0.02390438247011952,
+  "cross_operator_samples": 485,
+  "accuracy_drop": 0.1211958762886598,
+  "true_positives": 245,
+  "true_negatives": 156,
+  "false_positives": 78,
+  "false_negatives": 6
+}

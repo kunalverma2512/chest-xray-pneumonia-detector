@@ -10,7 +10,7 @@ frontend consumer (React + Vite, Swagger UI, automated tests, etc.).
 from __future__ import annotations
 
 from typing import Literal, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 # ---------------------------------------------------------------------------
@@ -73,6 +73,7 @@ class PredictionResponse(BaseModel):
 
     All fields are designed for direct consumption by a React frontend.
     """
+    model_config = ConfigDict(protected_namespaces=())
 
     # Core result
     diagnosis: Literal["PNEUMONIA", "NORMAL"] = Field(
@@ -134,6 +135,7 @@ class PredictionResponse(BaseModel):
 
 class HealthResponse(BaseModel):
     """JSON response for `GET /api/v1/health`."""
+    model_config = ConfigDict(protected_namespaces=())
 
     status: Literal["healthy", "degraded", "unhealthy"]
     model_loaded: bool
@@ -151,6 +153,7 @@ class HealthResponse(BaseModel):
 
 class ModelInfoResponse(BaseModel):
     """JSON response for `GET /api/v1/info`."""
+    model_config = ConfigDict(protected_namespaces=())
 
     model_loaded: bool
     model_path: Optional[str]

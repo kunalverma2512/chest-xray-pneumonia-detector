@@ -244,7 +244,7 @@ class CrossOperatorValidator:
         return np.array(images), np.array(labels)
 
     def _calculate_metrics(self, y_true: np.ndarray, y_pred: np.ndarray) -> dict:
-        """Calculate comprehensive clinical metrics (unchanged from original)."""
+    """Calculate comprehensive clinical metrics ."""
         tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
         accuracy = accuracy_score(y_true, y_pred)
         precision = precision_score(y_true, y_pred)
