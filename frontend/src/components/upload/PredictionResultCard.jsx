@@ -28,9 +28,8 @@ export default function PredictionResultCard({ data, loading, error }) {
           <div>
             <p style={{ fontWeight: 600, color: '#000' }}>Analysis failed</p>
             <p style={{ fontSize: '0.8rem', color: '#999', marginTop: '4px' }}>{error}</p>
-            <p style={{ fontSize: '0.8rem', color: '#999', marginTop: '4px' }}>
-              Ensure the backend is running at{' '}
-              <code style={{ color: '#000', fontWeight: 600 }}>localhost:8000</code>
+            <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: '#999' }}>
+              Ensure the backend API is running and reachable.
             </p>
           </div>
         </div>
