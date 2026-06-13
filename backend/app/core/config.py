@@ -71,6 +71,7 @@ class Settings(BaseSettings):
         "http://127.0.0.1:5173",
         "http://localhost:3000",   # CRA / other common ports
         "http://127.0.0.1:3000",
+        "https://chest-xray-pneumonia-detector.vercel.app", # Vercel production frontend
     ]
 
     @field_validator("cors_origins", mode="before")
