@@ -35,3 +35,6 @@ Thumbs.db
 
 # Models and Data (If running locally within backend)
 data/
+models/*
+!models/best_chest_xray_model.h5
+
